@@ -10,6 +10,8 @@ select = ["E", "W", "F", "I", "B", "UP", "SIM", "BLE"]
 
 [tool.ruff.lint.isort]
 force-sort-within-sections = true
+# Each ROS package is its own import root, so ruff cannot infer these.
+known-first-party = ["agrinav_*"]
 
 [tool.pytest.ini_options]
 testpaths = ["src"]
