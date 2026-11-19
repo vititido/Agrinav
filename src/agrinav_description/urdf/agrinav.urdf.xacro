@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!-- agrinav: four-wheel skid-steer platform. Frames follow REP-105:
+     base_footprint (ground projection) -> base_link (wheel axle height). -->
+<robot name="agrinav" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Path to the controller_manager YAML. Empty disables the Gazebo
+       ros2_control plugin, which is what display.launch.py and the tests want. -->
+  <xacro:arg name="controllers_file" default=""/>
+
+  <xacro:include filename="inertial_macros.xacro"/>
+
+  <xacro:property name="chassis_length" value="0.9"/>
+  <xacro:property name="chassis_width" value="0.6"/>
+  <xacro:property name="chassis_height" value="0.2"/>
+  <xacro:property name="chassis_mass" value="40.0"/>
+
+  <xacro:property name="wheel_radius" value="0.15"/>
+  <xacro:property name="wheel_width" value="0.1"/>
+  <xacro:property name="wheel_mass" value="2.0"/>
+  <!-- Wheel centers: +-wheelbase/2 along x, +-track/2 along y. -->
+  <xacro:property name="wheelbase" value="0.6"/>
+  <xacro:property name="track" value="${chassis_width + wheel_width}"/>
+
+  <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 ${wheel_radius}" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 ${chassis_height / 2}" rpy="0 0 0"/>
+      <geometry><box size="${chassis_length} ${chassis_width} ${chassis_height}"/></geometry>
+      <material name="chassis_green"><color rgba="0.20 0.45 0.20 1.0"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${chassis_height / 2}" rpy="0 0 0"/>
+      <geometry><box size="${chassis_length} ${chassis_width} ${chassis_height}"/></geometry>
+    </collision>
+    <xacro:box_inertial mass="${chassis_mass}" x="${chassis_length}" y="${chassis_width}"
+                        z="${chassis_height}">
+      <origin xyz="0 0 ${chassis_height / 2}" rpy="0 0 0"/>
+    </xacro:box_inertial>
+  </link>
+
+  <xacro:macro name="wheel" params="name x y">
+    <link name="${name}_wheel_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi / 2} 0 0"/>
+        <geometry><cylinder radius="${wheel_radius}" length="${wheel_width}"/></geometry>
+        <material name="tire_black"><color rgba="0.1 0.1 0.1 1.0"/></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi / 2} 0 0"/>
+        <geometry><cylinder radius="${wheel_radius}" length="${wheel_width}"/></geometry>
+      </collision>
+      <xacro:cylinder_inertial mass="${wheel_mass}" radius="${wheel_radius}"
+                               length="${wheel_width}">
+        <origin xyz="0 0 0" rpy="${pi / 2} 0 0"/>
+      </xacro:cylinder_inertial>
+    </link>
+    <joint name="${name}_wheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="${name}_wheel_link"/>
+      <origin xyz="${x} ${y} 0" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:wheel name="front_left" x="${wheelbase / 2}" y="${track / 2}"/>
+  <xacro:wheel name="rear_left" x="${-wheelbase / 2}" y="${track / 2}"/>
+  <xacro:wheel name="front_right" x="${wheelbase / 2}" y="${-track / 2}"/>
+  <xacro:wheel name="rear_right" x="${-wheelbase / 2}" y="${-track / 2}"/>
+
+  <xacro:include filename="sensors/lidar.xacro"/>
+  <xacro:include filename="sensors/camera.xacro"/>
+  <xacro:include filename="sensors/imu.xacro"/>
+
+  <!-- Raised so the lowest channel (-15 deg) clears the chassis top. -->
+  <xacro:property name="lidar_mast" value="0.2"/>
+  <xacro:lidar parent="base_link" x="0.25" y="0.0" z="${chassis_height + lidar_mast + 0.035}"
+               mast_length="${lidar_mast}"/>
+  <xacro:rgbd_camera parent="base_link" x="${chassis_length / 2 - 0.03}" y="0.0"
+                     z="${chassis_height + 0.05}"/>
+  <xacro:imu parent="base_link" x="0.0" y="0.0" z="${chassis_height / 2}"/>
+
+  <xacro:include filename="ros2_control.xacro"/>
+  <xacro:agrinav_ros2_control controllers_file="$(arg controllers_file)"/>
+
+</robot>
