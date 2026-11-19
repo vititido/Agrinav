@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!-- 16-channel 3D lidar (VLP-16-like geometry) simulated with gpu_lidar. -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- mast_length: distance from the mounting surface to the bottom of the sensor body, in m. -->
+  <xacro:macro name="lidar" params="parent x y z mast_length">
+    <xacro:property name="body_radius" value="0.05"/>
+    <xacro:property name="body_height" value="0.07"/>
+
+    <link name="lidar_link">
+      <visual>
+        <geometry><cylinder radius="${body_radius}" length="${body_height}"/></geometry>
+        <material name="lidar_gray"><color rgba="0.3 0.3 0.3 1.0"/></material>
+      </visual>
+      <visual>
+        <origin xyz="0 0 ${-(body_height + mast_length) / 2}" rpy="0 0 0"/>
+        <geometry><cylinder radius="0.015" length="${mast_length}"/></geometry>
+        <material name="lidar_gray"/>
+      </visual>
+      <collision>
+        <geometry><cylinder radius="${body_radius}" length="${body_height}"/></geometry>
+      </collision>
+      <xacro:cylinder_inertial mass="0.8" radius="${body_radius}" length="${body_height}">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </xacro:cylinder_inertial>
+    </link>
+
+    <joint name="lidar_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="lidar_link"/>
+      <origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
+    </joint>
+
+    <gazebo reference="lidar_link">
+      <sensor name="lidar" type="gpu_lidar">
+        <gz_frame_id>lidar_link</gz_frame_id>
+        <topic>points</topic>
+        <update_rate>10</update_rate>
+        <always_on>true</always_on>
+        <visualize>false</visualize>
+        <lidar>
+          <scan>
+            <!-- 900 samples = 0.4 deg azimuth step; finer steps cost render time
+                 without changing the 2D scan that SLAM and AMCL see. -->
+            <horizontal>
+              <samples>900</samples>
+              <min_angle>${-pi}</min_angle>
+              <max_angle>${pi}</max_angle>
+            </horizontal>
+            <!-- 16 channels over +-15 deg, as on a VLP-16. -->
+            <vertical>
+              <samples>16</samples>
+              <min_angle>${-15 * pi / 180}</min_angle>
+              <max_angle>${15 * pi / 180}</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>30.0</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.01</stddev>
+          </noise>
+        </lidar>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+</robot>
