@@ -27,10 +27,22 @@ docker compose up sim
 
 The first build takes several minutes. With an NVIDIA GPU and the NVIDIA Container Toolkit, use `docker compose --profile gpu up sim-gpu` instead.
 
-Drive the robot from a second terminal (keys `i`, `j`, `l`, `,`). Commands run
+Drive the robot from a second terminal: `w` forward, `s` backward, `a` turn left,
+`d` turn right, and `r` stop. Keep that terminal focused. Commands run
 through `/entrypoint.sh`, which loads the ROS environment:
 
 ```bash
-docker compose exec sim /entrypoint.sh ros2 run teleop_twist_keyboard teleop_twist_keyboard \
-  --ros-args -p stamped:=true -r cmd_vel:=/diff_drive_controller/cmd_vel
+docker compose exec sim /entrypoint.sh ros2 run agrinav_bringup teleop --ros-args -p stamped:=true -r cmd_vel:=/diff_drive_controller/cmd_vel
 ```
+
+After updating the source, stop the old simulation with Ctrl-C and rebuild it:
+
+```bash
+docker compose up --build sim
+```
+
+Run the keyboard command in a second Ubuntu/WSL terminal in this same directory,
+not in the Gazebo window. Its help must list WASD and `r`; the upstream
+`teleop_twist_keyboard` executable still uses its original keys. If ROS reports
+`No executable found`, check that your checkout includes the `teleop` entry point
+and recreate the simulation with the rebuild command above.
