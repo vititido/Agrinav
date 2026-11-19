@@ -46,3 +46,23 @@ not in the Gazebo window. Its help must list WASD and `r`; the upstream
 `teleop_twist_keyboard` executable still uses its original keys. If ROS reports
 `No executable found`, check that your checkout includes the `teleop` entry point
 and recreate the simulation with the rebuild command above.
+
+## State estimation
+
+The simulation also starts an EKF for wheel odometry and IMU fusion, and a
+converter from the 3D lidar cloud to a 2D scan. Rebuild after updating the source:
+
+```bash
+docker compose up --build sim
+```
+
+From a second terminal in the repository, check the filtered odometry and scan:
+
+```bash
+docker compose exec sim /entrypoint.sh ros2 topic hz /odometry/filtered
+docker compose exec sim /entrypoint.sh ros2 topic echo /scan --once
+```
+
+Run these commands separately (Ctrl-C stops the rate check). `/scan` is produced
+only while a subscriber exists. The EKF owns `odom -> base_footprint`; ground truth
+is used only for validation. See [state estimation](docs/architecture.md).

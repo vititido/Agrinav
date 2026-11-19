@@ -23,6 +23,9 @@ setup(
     license="Apache-2.0",
     tests_require=["pytest"],
     entry_points={
-        "console_scripts": ["teleop = agrinav_bringup.teleop:main"],
+        "console_scripts": [
+            "teleop = agrinav_bringup.teleop:main",
+            "imu_covariance = agrinav_bringup.imu_covariance:main",
+        ],
     },
 )

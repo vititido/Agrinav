@@ -24,8 +24,8 @@ diff_drive_controller:
 
     odom_frame_id: odom
     base_frame_id: base_footprint
-    # Published here until the EKF takes over odom -> base_footprint.
-    enable_odom_tf: true
+    # Only the EKF publishes odom -> base_footprint.
+    enable_odom_tf: false
     publish_rate: 50.0  # Hz
     # Wheel odometry is good in x and yaw rate, poor in y (no lateral sensing).
     pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]
