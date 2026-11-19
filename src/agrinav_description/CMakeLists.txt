@@ -3,6 +3,6 @@ project(agrinav_description)
 
 find_package(ament_cmake REQUIRED)
 
-install(DIRECTORY urdf DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY launch rviz urdf DESTINATION share/${PROJECT_NAME})
 
 ament_package()
