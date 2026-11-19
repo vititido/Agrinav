@@ -41,15 +41,18 @@ jobs:
 
   build-test:
     runs-on: ubuntu-24.04
+    # The ros-tooling image ships ROS and the CI tools, so the job does not
+    # depend on what the hosted runner image has preinstalled. On the bare
+    # runner the ROS Python modules intermittently went missing from
+    # PYTHONPATH during the build, which did not reproduce in a clean
+    # Ubuntu 24.04 with the same packages.
+    container:
+      image: rostooling/setup-ros-docker:ubuntu-noble-ros-jazzy-ros-base-latest
     steps:
       - uses: actions/checkout@v7
       - name: Report empty workspace
         if: hashFiles('src/**/package.xml') == ''
         run: echo "No ROS packages in src/ yet; nothing to build."
-      - uses: ros-tooling/setup-ros@v0.7
-        if: hashFiles('src/**/package.xml') != ''
-        with:
-          required-ros-distributions: jazzy
       - uses: ros-tooling/action-ros-ci@v0.4
         if: hashFiles('src/**/package.xml') != ''
         with:
