@@ -1,0 +1,18 @@
+# colcon
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Evaluation runs are reproducible from the code; only the run cited in the
+# README is kept, added with `git add -f`.
+results/*
+
+# Model cache mounted into the perception container
+.cache/

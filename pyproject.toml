@@ -1,0 +1,16 @@
+# Repository-wide tool configuration. ROS packages keep their own setup.py;
+# this file only configures ruff and pytest.
+
+[tool.ruff]
+line-length = 99
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM", "BLE"]
+
+[tool.ruff.lint.isort]
+force-sort-within-sections = true
+
+[tool.pytest.ini_options]
+testpaths = ["src"]
+addopts = "-ra"
