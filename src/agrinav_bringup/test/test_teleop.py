@@ -5,6 +5,7 @@ import pty
 import select
 import signal
 import subprocess
+import termios
 import time
 
 from geometry_msgs.msg import TwistStamped
@@ -50,6 +51,15 @@ def test_wasd_publishes_stamped_commands() -> None:
             assert time.monotonic() < deadline, "keyboard publisher was not discovered"
             rclpy.spin_once(node, timeout_sec=0.1)
 
+        # Graph discovery can precede DDS matching. Establish delivery with stop
+        # commands before testing a single movement keypress.
+        deadline = time.monotonic() + 5
+        while not received and time.monotonic() < deadline:
+            os.write(master, b"r")
+            rclpy.spin_once(node, timeout_sec=0.1)
+        assert received, "DDS did not deliver the initial stop"
+        rclpy.spin_once(node, timeout_sec=0.1)
+
         for key, expected in [
             ("w", (0.5, 0.0)),
             ("r", (0.0, 0.0)),
@@ -58,12 +68,19 @@ def test_wasd_publishes_stamped_commands() -> None:
             ("d", (0.0, -1.0)),
             ("?", (0.0, 0.0)),
         ]:
+            # tty.setraw flushes pending input, so wait until it is ready.
+            deadline = time.monotonic() + 3
+            while termios.tcgetattr(master)[3] & termios.ICANON:
+                assert time.monotonic() < deadline, "keyboard did not enter raw mode"
+                rclpy.spin_once(node, timeout_sec=0.01)
             received.clear()
             os.write(master, key.encode())
             deadline = time.monotonic() + 3
             while not received and time.monotonic() < deadline:
                 rclpy.spin_once(node, timeout_sec=0.1)
-            assert received, f"no command for {key}"
+            if not received and select.select([master], [], [], 0)[0]:
+                output += os.read(master, 4096)
+            assert received, f"no command for {key}: {output.decode(errors='replace')}"
             message = received[-1]
             assert (message.twist.linear.x, message.twist.angular.z) == expected
             assert message.header.stamp.sec > 0
