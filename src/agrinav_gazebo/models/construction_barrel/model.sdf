@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<!-- OpenRobotics "Construction Barrel" (CC0-1.0), scaled to the size of a
+     200 L drum (0.61 m diameter, 0.93 m tall) and made static. -->
+<sdf version="1.9">
+  <model name="construction_barrel">
+    <static>true</static>
+    <link name="link">
+      <collision name="collision">
+        <pose>0 0 0.465 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.305</radius>
+            <length>0.93</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://construction_barrel/meshes/construction_barrel.dae</uri>
+            <scale>0.6 0.6 0.6</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

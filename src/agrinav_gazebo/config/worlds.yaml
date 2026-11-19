@@ -1,0 +1,33 @@
+# Parameters for generate_orchard. Distances in meters, angles in radians.
+# Changing anything here changes the generated world and its ground truth:
+# regenerate worlds/<name>/ground_truth.yaml with `generate_orchard --write-ground-truth`.
+
+defaults: &defaults
+  row_spacing: 6.0          # m between tree rows (aisle width plus trunk)
+  tree_spacing: 4.0         # m between trees in a row
+  jitter: 0.15              # m, uniform +- on each tree coordinate
+  headland: 6.0             # m of open ground beyond the first and last tree of each row
+  spawn: {x: -3.0, y: 3.0, yaw: 0.0}  # robot start in the world frame, facing the first aisle
+  min_object_distance: 2.0  # m between any two non-tree objects
+  min_spawn_distance: 3.0   # m from the spawn point to any object
+  trunk_clearance: 1.0      # m from a trunk surface to an object footprint
+  aisle_band: 1.6           # m, objects sit at most this far from a tree line (keeps the aisle center free)
+  models:
+    tree:   {uri: "model://orchard_tree", size: [2.0, 2.0, 3.5], radius: 0.12}
+    crate:  {uri: "model://cardboard_box", size: [0.5, 0.4, 0.3], radius: 0.32}
+    barrel: {uri: "model://construction_barrel", size: [0.61, 0.61, 0.93], radius: 0.31}
+    person: {uri: "model://person_standing", size: [0.55, 0.36, 1.92], radius: 0.3}
+
+worlds:
+  orchard_small:
+    <<: *defaults
+    seed: 42
+    rows: 3
+    trees_per_row: 6
+    counts: {crate: 4, barrel: 2, person: 1}
+  orchard:
+    <<: *defaults
+    seed: 7
+    rows: 6
+    trees_per_row: 10
+    counts: {crate: 8, barrel: 4, person: 3}

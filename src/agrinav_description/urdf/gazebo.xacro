@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!-- Gazebo-only additions: wheel contact parameters and the ground-truth pose.
+     Emitted only when the model is spawned in simulation. -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="wheel_contact" params="link">
+    <gazebo reference="${link}">
+      <collision>
+        <surface>
+          <friction>
+            <ode>
+              <!-- Equal friction along and across the wheel: a skid-steer base
+                   has to slip sideways to turn, and a lower mu2 would make it
+                   drift on straight runs instead. -->
+              <mu>1.0</mu>
+              <mu2>1.0</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:macro name="agrinav_gazebo">
+    <xacro:wheel_contact link="front_left_wheel_link"/>
+    <xacro:wheel_contact link="rear_left_wheel_link"/>
+    <xacro:wheel_contact link="front_right_wheel_link"/>
+    <xacro:wheel_contact link="rear_right_wheel_link"/>
+
+    <!-- True pose of base_footprint for the oracle detector and the evaluation
+         only; navigation never subscribes to it. -->
+    <gazebo>
+      <plugin filename="gz-sim-odometry-publisher-system"
+              name="gz::sim::systems::OdometryPublisher">
+        <odom_frame>world</odom_frame>
+        <robot_base_frame>base_footprint</robot_base_frame>
+        <odom_topic>ground_truth/odom</odom_topic>
+        <tf_topic>ground_truth/tf</tf_topic>
+        <dimensions>3</dimensions>
+        <odom_publish_frequency>50</odom_publish_frequency>
+      </plugin>
+    </gazebo>
+  </xacro:macro>
+
+</robot>

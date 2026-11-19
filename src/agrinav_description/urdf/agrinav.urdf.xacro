@@ -3,8 +3,9 @@
      base_footprint (ground projection) -> base_link (wheel axle height). -->
 <robot name="agrinav" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <!-- Path to the controller_manager YAML. Empty disables the Gazebo
-       ros2_control plugin, which is what display.launch.py and the tests want. -->
+  <!-- Path to the controller_manager YAML. Set only when spawning in Gazebo;
+       empty leaves out every Gazebo plugin, which is what display.launch.py
+       and the tests want. -->
   <xacro:arg name="controllers_file" default=""/>
 
   <xacro:include filename="inertial_macros.xacro"/>
@@ -88,5 +89,10 @@
 
   <xacro:include filename="ros2_control.xacro"/>
   <xacro:agrinav_ros2_control controllers_file="$(arg controllers_file)"/>
+
+  <xacro:include filename="gazebo.xacro"/>
+  <xacro:if value="${'$(arg controllers_file)' != ''}">
+    <xacro:agrinav_gazebo/>
+  </xacro:if>
 
 </robot>

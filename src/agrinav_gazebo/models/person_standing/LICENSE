@@ -1,0 +1,9 @@
+This model is redistributed from Gazebo Fuel:
+https://app.gazebosim.org/OpenRobotics/fuel/models/Standing%20person
+
+License: Creative Commons Zero v1.0 Universal (CC0-1.0)
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Changes in this copy: thumbnails and unused textures removed, textures
+downscaled, model.sdf rewritten (static, simplified collision; the barrel is
+also scaled). See the comment at the top of model.sdf.
