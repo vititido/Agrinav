@@ -1,0 +1,9 @@
+.git
+build/
+install/
+log/
+results/
+.cache/
+docs/media/
+**/__pycache__/
+.venv/

@@ -1,0 +1,36 @@
+# GUI: X11 on Linux (run `xhost +local:` once per login) and WSLg on
+# Windows 11, which serves X11 on the same socket.
+x-gui: &gui
+  environment:
+    DISPLAY: ${DISPLAY:-:0}
+    QT_X11_NO_MITSHM: "1"
+    ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-0}
+  volumes:
+    - /tmp/.X11-unix:/tmp/.X11-unix:rw
+  # Host networking and IPC let DDS discovery and shared memory work as on
+  # the host, without per-container DDS configuration.
+  network_mode: host
+  ipc: host
+
+services:
+  sim:
+    <<: *gui
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: dev
+    image: agrinav:dev
+    command: ros2 launch agrinav_bringup sim.launch.py world:=orchard_small
+
+  sim-gpu:
+    extends: sim
+    profiles: [gpu]
+    environment:
+      NVIDIA_DRIVER_CAPABILITIES: all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
