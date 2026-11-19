@@ -5,6 +5,9 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -51,3 +54,6 @@ jobs:
         if: hashFiles('src/**/package.xml') != ''
         with:
           target-ros2-distro: jazzy
+          # action-ros-ci re-clones the repository with vcs; the job token lets
+          # it read a private repository.
+          import-token: ${{ secrets.GITHUB_TOKEN }}
