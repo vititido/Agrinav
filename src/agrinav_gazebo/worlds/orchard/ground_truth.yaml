@@ -1,0 +1,530 @@
+world: orchard
+seed: 7
+frame: world
+spawn: {x: -3.0, y: 3.0, yaw: 0.0}
+objects:
+- id: tree_1
+  label: tree
+  x: 0.038
+  y: 0.119
+  z: 1.75
+  yaw: 1.732
+  size: [2.0, 2.0, 3.5]
+- id: tree_2
+  label: tree
+  x: 3.918
+  y: -0.06
+  z: 1.75
+  yaw: 2.347
+  size: [2.0, 2.0, 3.5]
+- id: tree_3
+  label: tree
+  x: 7.852
+  y: 0.096
+  z: 1.75
+  yaw: 1.867
+  size: [2.0, 2.0, 3.5]
+- id: tree_4
+  label: tree
+  x: 11.99
+  y: -0.059
+  z: 1.75
+  yaw: -1.392
+  size: [2.0, 2.0, 3.5]
+- id: tree_5
+  label: tree
+  x: 15.926
+  y: -0.016
+  z: 1.75
+  yaw: 0.029
+  size: [2.0, 2.0, 3.5]
+- id: tree_6
+  label: tree
+  x: 20.016
+  y: 0.149
+  z: 1.75
+  yaw: 1.839
+  size: [2.0, 2.0, 3.5]
+- id: tree_7
+  label: tree
+  x: 24.037
+  y: 0.147
+  z: 1.75
+  yaw: -1.789
+  size: [2.0, 2.0, 3.5]
+- id: tree_8
+  label: tree
+  x: 27.898
+  y: 0.034
+  z: 1.75
+  yaw: -2.865
+  size: [2.0, 2.0, 3.5]
+- id: tree_9
+  label: tree
+  x: 31.861
+  y: 0.004
+  z: 1.75
+  yaw: -0.212
+  size: [2.0, 2.0, 3.5]
+- id: tree_10
+  label: tree
+  x: 36.125
+  y: 0.039
+  z: 1.75
+  yaw: 0.089
+  size: [2.0, 2.0, 3.5]
+- id: tree_11
+  label: tree
+  x: -0.001
+  y: 5.924
+  z: 1.75
+  yaw: -3.067
+  size: [2.0, 2.0, 3.5]
+- id: tree_12
+  label: tree
+  x: 3.908
+  y: 6.058
+  z: 1.75
+  yaw: -1.881
+  size: [2.0, 2.0, 3.5]
+- id: tree_13
+  label: tree
+  x: 7.961
+  y: 5.851
+  z: 1.75
+  yaw: 2.074
+  size: [2.0, 2.0, 3.5]
+- id: tree_14
+  label: tree
+  x: 11.896
+  y: 5.93
+  z: 1.75
+  yaw: 2.39
+  size: [2.0, 2.0, 3.5]
+- id: tree_15
+  label: tree
+  x: 16.003
+  y: 6.104
+  z: 1.75
+  yaw: 0.878
+  size: [2.0, 2.0, 3.5]
+- id: tree_16
+  label: tree
+  x: 20.073
+  y: 5.877
+  z: 1.75
+  yaw: 0.259
+  size: [2.0, 2.0, 3.5]
+- id: tree_17
+  label: tree
+  x: 24.002
+  y: 6.111
+  z: 1.75
+  yaw: -0.872
+  size: [2.0, 2.0, 3.5]
+- id: tree_18
+  label: tree
+  x: 28.029
+  y: 5.868
+  z: 1.75
+  yaw: -0.706
+  size: [2.0, 2.0, 3.5]
+- id: tree_19
+  label: tree
+  x: 31.947
+  y: 5.895
+  z: 1.75
+  yaw: 1.988
+  size: [2.0, 2.0, 3.5]
+- id: tree_20
+  label: tree
+  x: 35.964
+  y: 6.144
+  z: 1.75
+  yaw: 0.565
+  size: [2.0, 2.0, 3.5]
+- id: tree_21
+  label: tree
+  x: 0.032
+  y: 12.041
+  z: 1.75
+  yaw: 1.109
+  size: [2.0, 2.0, 3.5]
+- id: tree_22
+  label: tree
+  x: 3.895
+  y: 11.982
+  z: 1.75
+  yaw: -1.636
+  size: [2.0, 2.0, 3.5]
+- id: tree_23
+  label: tree
+  x: 7.971
+  y: 11.879
+  z: 1.75
+  yaw: 2.939
+  size: [2.0, 2.0, 3.5]
+- id: tree_24
+  label: tree
+  x: 11.915
+  y: 12.052
+  z: 1.75
+  yaw: -1.254
+  size: [2.0, 2.0, 3.5]
+- id: tree_25
+  label: tree
+  x: 16.112
+  y: 12.049
+  z: 1.75
+  yaw: -2.315
+  size: [2.0, 2.0, 3.5]
+- id: tree_26
+  label: tree
+  x: 20.104
+  y: 12.133
+  z: 1.75
+  yaw: 2.538
+  size: [2.0, 2.0, 3.5]
+- id: tree_27
+  label: tree
+  x: 24.021
+  y: 11.894
+  z: 1.75
+  yaw: -1.932
+  size: [2.0, 2.0, 3.5]
+- id: tree_28
+  label: tree
+  x: 28.128
+  y: 12.016
+  z: 1.75
+  yaw: -2.007
+  size: [2.0, 2.0, 3.5]
+- id: tree_29
+  label: tree
+  x: 32.115
+  y: 12.042
+  z: 1.75
+  yaw: 0.438
+  size: [2.0, 2.0, 3.5]
+- id: tree_30
+  label: tree
+  x: 35.963
+  y: 11.973
+  z: 1.75
+  yaw: -1.637
+  size: [2.0, 2.0, 3.5]
+- id: tree_31
+  label: tree
+  x: -0.139
+  y: 18.113
+  z: 1.75
+  yaw: -0.203
+  size: [2.0, 2.0, 3.5]
+- id: tree_32
+  label: tree
+  x: 4.014
+  y: 17.947
+  z: 1.75
+  yaw: 1.579
+  size: [2.0, 2.0, 3.5]
+- id: tree_33
+  label: tree
+  x: 7.858
+  y: 17.962
+  z: 1.75
+  yaw: -2.951
+  size: [2.0, 2.0, 3.5]
+- id: tree_34
+  label: tree
+  x: 11.887
+  y: 18.14
+  z: 1.75
+  yaw: 0.991
+  size: [2.0, 2.0, 3.5]
+- id: tree_35
+  label: tree
+  x: 15.978
+  y: 18.007
+  z: 1.75
+  yaw: 2.342
+  size: [2.0, 2.0, 3.5]
+- id: tree_36
+  label: tree
+  x: 19.953
+  y: 18.027
+  z: 1.75
+  yaw: 1.154
+  size: [2.0, 2.0, 3.5]
+- id: tree_37
+  label: tree
+  x: 23.957
+  y: 18.006
+  z: 1.75
+  yaw: 1.667
+  size: [2.0, 2.0, 3.5]
+- id: tree_38
+  label: tree
+  x: 28.123
+  y: 17.895
+  z: 1.75
+  yaw: 2.723
+  size: [2.0, 2.0, 3.5]
+- id: tree_39
+  label: tree
+  x: 31.852
+  y: 18.076
+  z: 1.75
+  yaw: 1.951
+  size: [2.0, 2.0, 3.5]
+- id: tree_40
+  label: tree
+  x: 35.891
+  y: 17.976
+  z: 1.75
+  yaw: 1.981
+  size: [2.0, 2.0, 3.5]
+- id: tree_41
+  label: tree
+  x: -0.146
+  y: 24.039
+  z: 1.75
+  yaw: 1.841
+  size: [2.0, 2.0, 3.5]
+- id: tree_42
+  label: tree
+  x: 4.004
+  y: 24.068
+  z: 1.75
+  yaw: -1.719
+  size: [2.0, 2.0, 3.5]
+- id: tree_43
+  label: tree
+  x: 7.91
+  y: 23.959
+  z: 1.75
+  yaw: -2.014
+  size: [2.0, 2.0, 3.5]
+- id: tree_44
+  label: tree
+  x: 11.954
+  y: 24.134
+  z: 1.75
+  yaw: 0.461
+  size: [2.0, 2.0, 3.5]
+- id: tree_45
+  label: tree
+  x: 15.952
+  y: 23.931
+  z: 1.75
+  yaw: 2.84
+  size: [2.0, 2.0, 3.5]
+- id: tree_46
+  label: tree
+  x: 19.983
+  y: 24.144
+  z: 1.75
+  yaw: 0.098
+  size: [2.0, 2.0, 3.5]
+- id: tree_47
+  label: tree
+  x: 24.006
+  y: 24.119
+  z: 1.75
+  yaw: 1.525
+  size: [2.0, 2.0, 3.5]
+- id: tree_48
+  label: tree
+  x: 28.024
+  y: 23.978
+  z: 1.75
+  yaw: 2.376
+  size: [2.0, 2.0, 3.5]
+- id: tree_49
+  label: tree
+  x: 31.973
+  y: 24.127
+  z: 1.75
+  yaw: -2.71
+  size: [2.0, 2.0, 3.5]
+- id: tree_50
+  label: tree
+  x: 35.979
+  y: 24.006
+  z: 1.75
+  yaw: 2.833
+  size: [2.0, 2.0, 3.5]
+- id: tree_51
+  label: tree
+  x: -0.075
+  y: 30.092
+  z: 1.75
+  yaw: 1.109
+  size: [2.0, 2.0, 3.5]
+- id: tree_52
+  label: tree
+  x: 4.065
+  y: 30.039
+  z: 1.75
+  yaw: 2.963
+  size: [2.0, 2.0, 3.5]
+- id: tree_53
+  label: tree
+  x: 7.95
+  y: 29.969
+  z: 1.75
+  yaw: -1.867
+  size: [2.0, 2.0, 3.5]
+- id: tree_54
+  label: tree
+  x: 11.865
+  y: 29.914
+  z: 1.75
+  yaw: 2.61
+  size: [2.0, 2.0, 3.5]
+- id: tree_55
+  label: tree
+  x: 16.102
+  y: 29.884
+  z: 1.75
+  yaw: 0.652
+  size: [2.0, 2.0, 3.5]
+- id: tree_56
+  label: tree
+  x: 19.994
+  y: 30.028
+  z: 1.75
+  yaw: 1.001
+  size: [2.0, 2.0, 3.5]
+- id: tree_57
+  label: tree
+  x: 23.942
+  y: 30.138
+  z: 1.75
+  yaw: -0.215
+  size: [2.0, 2.0, 3.5]
+- id: tree_58
+  label: tree
+  x: 28.038
+  y: 30.041
+  z: 1.75
+  yaw: -1.986
+  size: [2.0, 2.0, 3.5]
+- id: tree_59
+  label: tree
+  x: 31.869
+  y: 29.973
+  z: 1.75
+  yaw: 1.659
+  size: [2.0, 2.0, 3.5]
+- id: tree_60
+  label: tree
+  x: 36.095
+  y: 30.069
+  z: 1.75
+  yaw: -2.43
+  size: [2.0, 2.0, 3.5]
+- id: crate_1
+  label: crate
+  x: 41.282
+  y: 26.331
+  z: 0.15
+  yaw: 0.146
+  size: [0.5, 0.4, 0.3]
+- id: crate_2
+  label: crate
+  x: 9.1
+  y: 7.012
+  z: 0.15
+  yaw: -1.58
+  size: [0.5, 0.4, 0.3]
+- id: crate_3
+  label: crate
+  x: 5.976
+  y: 7.354
+  z: 0.15
+  yaw: 1.118
+  size: [0.5, 0.4, 0.3]
+- id: crate_4
+  label: crate
+  x: 29.217
+  y: 19.323
+  z: 0.15
+  yaw: 0.993
+  size: [0.5, 0.4, 0.3]
+- id: crate_5
+  label: crate
+  x: 41.072
+  y: 5.738
+  z: 0.15
+  yaw: 0.467
+  size: [0.5, 0.4, 0.3]
+- id: crate_6
+  label: crate
+  x: 34.563
+  y: 13.481
+  z: 0.15
+  yaw: 2.224
+  size: [0.5, 0.4, 0.3]
+- id: crate_7
+  label: crate
+  x: -4.524
+  y: 18.798
+  z: 0.15
+  yaw: 1.869
+  size: [0.5, 0.4, 0.3]
+- id: crate_8
+  label: crate
+  x: 31.061
+  y: 10.812
+  z: 0.15
+  yaw: 1.867
+  size: [0.5, 0.4, 0.3]
+- id: barrel_1
+  label: barrel
+  x: 3.465
+  y: 13.366
+  z: 0.465
+  yaw: 1.013
+  size: [0.61, 0.61, 0.93]
+- id: barrel_2
+  label: barrel
+  x: 29.66
+  y: 22.621
+  z: 0.465
+  yaw: 1.907
+  size: [0.61, 0.61, 0.93]
+- id: barrel_3
+  label: barrel
+  x: 31.222
+  y: 13.433
+  z: 0.465
+  yaw: 2.469
+  size: [0.61, 0.61, 0.93]
+- id: barrel_4
+  label: barrel
+  x: 0.961
+  y: 10.903
+  z: 0.465
+  yaw: 0.948
+  size: [0.61, 0.61, 0.93]
+- id: person_1
+  label: person
+  x: 34.013
+  y: 22.662
+  z: 0.96
+  yaw: -0.758
+  size: [0.55, 0.36, 1.92]
+- id: person_2
+  label: person
+  x: 40.511
+  y: 11.418
+  z: 0.96
+  yaw: -2.301
+  size: [0.55, 0.36, 1.92]
+- id: person_3
+  label: person
+  x: 8.907
+  y: 13.129
+  z: 0.96
+  yaw: -1.069
+  size: [0.55, 0.36, 1.92]

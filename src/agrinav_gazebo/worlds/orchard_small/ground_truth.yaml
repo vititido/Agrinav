@@ -1,0 +1,180 @@
+world: orchard_small
+seed: 42
+frame: world
+spawn: {x: -3.0, y: 3.0, yaw: 0.0}
+objects:
+- id: tree_1
+  label: tree
+  x: 0.082
+  y: -0.018
+  z: 1.75
+  yaw: 2.253
+  size: [2.0, 2.0, 3.5]
+- id: tree_2
+  label: tree
+  x: 4.059
+  y: -0.122
+  z: 1.75
+  yaw: 2.988
+  size: [2.0, 2.0, 3.5]
+- id: tree_3
+  label: tree
+  x: 8.078
+  y: 0.086
+  z: 1.75
+  yaw: -2.337
+  size: [2.0, 2.0, 3.5]
+- id: tree_4
+  label: tree
+  x: 11.985
+  y: -0.039
+  z: 1.75
+  yaw: 2.681
+  size: [2.0, 2.0, 3.5]
+- id: tree_5
+  label: tree
+  x: 16.043
+  y: 0.097
+  z: 1.75
+  yaw: -0.356
+  size: [2.0, 2.0, 3.5]
+- id: tree_6
+  label: tree
+  x: 19.918
+  y: 0.016
+  z: 1.75
+  yaw: -2.741
+  size: [2.0, 2.0, 3.5]
+- id: tree_7
+  label: tree
+  x: 0.098
+  y: 6.039
+  z: 1.75
+  yaw: 1.622
+  size: [2.0, 2.0, 3.5]
+- id: tree_8
+  label: tree
+  x: 3.956
+  y: 6.141
+  z: 1.75
+  yaw: 2.47
+  size: [2.0, 2.0, 3.5]
+- id: tree_9
+  label: tree
+  x: 8.084
+  y: 5.908
+  z: 1.75
+  yaw: -0.209
+  size: [2.0, 2.0, 3.5]
+- id: tree_10
+  label: tree
+  x: 11.863
+  y: 5.896
+  z: 1.75
+  yaw: 1.15
+  size: [2.0, 2.0, 3.5]
+- id: tree_11
+  label: tree
+  x: 16.073
+  y: 6.14
+  z: 1.75
+  yaw: -1.094
+  size: [2.0, 2.0, 3.5]
+- id: tree_12
+  label: tree
+  x: 19.961
+  y: 5.991
+  z: 1.75
+  yaw: -1.951
+  size: [2.0, 2.0, 3.5]
+- id: tree_13
+  label: tree
+  x: -0.111
+  y: 11.993
+  z: 1.75
+  yaw: -1.716
+  size: [2.0, 2.0, 3.5]
+- id: tree_14
+  label: tree
+  x: 4.051
+  y: 11.981
+  z: 1.75
+  yaw: 2.09
+  size: [2.0, 2.0, 3.5]
+- id: tree_15
+  label: tree
+  x: 8.06
+  y: 11.944
+  z: 1.75
+  yaw: 2.088
+  size: [2.0, 2.0, 3.5]
+- id: tree_16
+  label: tree
+  x: 12.091
+  y: 11.966
+  z: 1.75
+  yaw: -1.33
+  size: [2.0, 2.0, 3.5]
+- id: tree_17
+  label: tree
+  x: 16.055
+  y: 11.892
+  z: 1.75
+  yaw: -1.886
+  size: [2.0, 2.0, 3.5]
+- id: tree_18
+  label: tree
+  x: 19.852
+  y: 12.086
+  z: 1.75
+  yaw: 1.036
+  size: [2.0, 2.0, 3.5]
+- id: crate_1
+  label: crate
+  x: 9.178
+  y: 7.468
+  z: 0.15
+  yaw: 0.432
+  size: [0.5, 0.4, 0.3]
+- id: crate_2
+  label: crate
+  x: 11.305
+  y: 7.283
+  z: 0.15
+  yaw: 1.665
+  size: [0.5, 0.4, 0.3]
+- id: crate_3
+  label: crate
+  x: -5.098
+  y: 6.643
+  z: 0.15
+  yaw: 0.372
+  size: [0.5, 0.4, 0.3]
+- id: crate_4
+  label: crate
+  x: 24.657
+  y: 0.7
+  z: 0.15
+  yaw: -1.374
+  size: [0.5, 0.4, 0.3]
+- id: barrel_1
+  label: barrel
+  x: 24.723
+  y: 7.943
+  z: 0.465
+  yaw: 0.358
+  size: [0.61, 0.61, 0.93]
+- id: barrel_2
+  label: barrel
+  x: 14.447
+  y: 7.054
+  z: 0.465
+  yaw: -0.24
+  size: [0.61, 0.61, 0.93]
+- id: person_1
+  label: person
+  x: 10.021
+  y: 1.097
+  z: 0.96
+  yaw: -2.185
+  size: [0.55, 0.36, 1.92]
