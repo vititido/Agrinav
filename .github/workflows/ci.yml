@@ -1,0 +1,48 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Install linters
+        run: |
+          pip install ruff==0.17.6
+          sudo apt-get update && sudo apt-get install -y --no-install-recommends libxml2-utils
+      - name: ruff check
+        run: ruff check .
+      - name: ruff format
+        run: ruff format --check .
+      - name: xmllint package manifests
+        run: |
+          files=$(find src -name package.xml 2>/dev/null || true)
+          if [ -z "$files" ]; then echo "No package.xml files yet."; exit 0; fi
+          xmllint --noout $files
+
+  build-test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Report empty workspace
+        if: hashFiles('src/**/package.xml') == ''
+        run: echo "No ROS packages in src/ yet; nothing to build."
+      - uses: ros-tooling/setup-ros@v0.7
+        if: hashFiles('src/**/package.xml') != ''
+        with:
+          required-ros-distributions: jazzy
+      - uses: ros-tooling/action-ros-ci@v0.4
+        if: hashFiles('src/**/package.xml') != ''
+        with:
+          target-ros2-distro: jazzy
