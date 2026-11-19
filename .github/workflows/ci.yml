@@ -5,6 +5,9 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -19,7 +22,7 @@ jobs:
           python-version: "3.12"
       - name: Install linters
         run: |
-          pip install ruff==0.17.6
+          pip install ruff==0.17.6 xacro
           sudo apt-get update && sudo apt-get install -y --no-install-recommends libxml2-utils
       - name: ruff check
         run: ruff check .
@@ -30,6 +33,11 @@ jobs:
           files=$(find src -name package.xml 2>/dev/null || true)
           if [ -z "$files" ]; then echo "No package.xml files yet."; exit 0; fi
           xmllint --noout $files
+      - name: xmllint generated URDF
+        if: hashFiles('src/agrinav_description/urdf/agrinav.urdf.xacro') != ''
+        run: |
+          xacro src/agrinav_description/urdf/agrinav.urdf.xacro > "$RUNNER_TEMP/agrinav.urdf"
+          xmllint --noout "$RUNNER_TEMP/agrinav.urdf"
 
   build-test:
     runs-on: ubuntu-24.04
@@ -46,3 +54,6 @@ jobs:
         if: hashFiles('src/**/package.xml') != ''
         with:
           target-ros2-distro: jazzy
+          # action-ros-ci re-clones the repository with vcs; the job token lets
+          # it read a private repository.
+          import-token: ${{ secrets.GITHUB_TOKEN }}

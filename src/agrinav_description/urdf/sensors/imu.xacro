@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!-- IMU at the chassis center. Noise levels are in the range of a consumer
+     MEMS unit (e.g. BMI088 datasheet densities integrated over 100 Hz). -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="imu_axis_noise" params="stddev">
+    <noise type="gaussian">
+      <mean>0.0</mean>
+      <stddev>${stddev}</stddev>
+    </noise>
+  </xacro:macro>
+
+  <xacro:macro name="imu" params="parent x y z">
+    <!-- Units: rad/s for the gyro, m/s^2 for the accelerometer. -->
+    <xacro:property name="gyro_stddev" value="0.005"/>
+    <xacro:property name="accel_stddev" value="0.02"/>
+
+    <link name="imu_link">
+      <xacro:box_inertial mass="0.05" x="0.03" y="0.03" z="0.01">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </xacro:box_inertial>
+    </link>
+
+    <joint name="imu_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="imu_link"/>
+      <origin xyz="${x} ${y} ${z}" rpy="0 0 0"/>
+    </joint>
+
+    <gazebo reference="imu_link">
+      <sensor name="imu" type="imu">
+        <gz_frame_id>imu_link</gz_frame_id>
+        <topic>imu</topic>
+        <update_rate>100</update_rate>
+        <always_on>true</always_on>
+        <imu>
+          <angular_velocity>
+            <x><xacro:imu_axis_noise stddev="${gyro_stddev}"/></x>
+            <y><xacro:imu_axis_noise stddev="${gyro_stddev}"/></y>
+            <z><xacro:imu_axis_noise stddev="${gyro_stddev}"/></z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x><xacro:imu_axis_noise stddev="${accel_stddev}"/></x>
+            <y><xacro:imu_axis_noise stddev="${accel_stddev}"/></y>
+            <z><xacro:imu_axis_noise stddev="${accel_stddev}"/></z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+
+</robot>
