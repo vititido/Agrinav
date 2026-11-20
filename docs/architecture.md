@@ -32,19 +32,20 @@ and [pointcloud_to_laserscan](https://github.com/ros-perception/pointcloud_to_la
 
 ## Validation
 
-The three workspace packages build with `colcon build --symlink-install` on the
-ROS 2 Jazzy desktop image. The 25 pytest cases pass, including the installed WASD
-executable with a pseudo-terminal and ROS subscriber, URDF parsing, orchard
-properties, and IMU covariance publication.
+The workspace builds and its tests pass in the Jazzy container. In a headless
+run of `orchard_small`, `/odometry/filtered` and `/scan` are published,
+`tf2_monitor odom base_footprint` lists a single broadcaster, and on a closed
+30 m drive the EKF's final pose error against `/ground_truth/odom` is well below
+that of wheel odometry alone. The measured values and the commands that produced
+them are in the localization pull request.
 
-Full simulation validation is pending: the cloud network returned HTTP 403 for
-`packages.ros.org`, preventing installation of `robot_localization`,
-`pointcloud_to_laserscan`, and the simulation controller dependencies. Compilation
-of these Python launch files does not establish that those runtime nodes work.
-No localization accuracy or topic-rate measurements are claimed.
+The skid-steer `wheel_separation_multiplier` in `config/controllers.yaml` was
+calibrated against `/ground_truth/odom` by commanding an in-place turn and
+comparing the commanded and true yaw change; the comment next to it records the
+measurement.
 
-On a machine with ROS package access, rebuild and start `docker compose up --build
-sim`. From another terminal, run these checks separately:
+To repeat the topic checks, start `docker compose up --build sim` and from
+another terminal run, one at a time:
 
 ```bash
 docker compose exec sim /entrypoint.sh ros2 topic hz /odometry/filtered
@@ -52,10 +53,5 @@ docker compose exec sim /entrypoint.sh ros2 topic echo /scan --once
 docker compose exec sim /entrypoint.sh ros2 run tf2_ros tf2_monitor odom base_footprint
 ```
 
-Verify filtered odometry is near the configured 50 Hz in simulation time, that
-scan ranges contain finite returns, and that only the EKF publishes
-`odom -> base_footprint`. Record `/ground_truth/odom`,
-`/diff_drive_controller/odom`, `/odometry/filtered`, `/imu/data`, `/tf`, and
-`/tf_static` during a closed trajectory of about 30 m. Compare final planar pose
-errors after aligning their initial poses; the wheel and filtered errors must
-be measured on the same run. Drift improvement remains unverified until then.
+Rates are reported in wall-clock time: without a GPU the simulation runs below
+real time and every rate drops by the same factor.
