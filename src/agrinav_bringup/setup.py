@@ -14,6 +14,8 @@ setup(
         (f"share/{package_name}/launch", glob("launch/*.launch.py")),
         (f"share/{package_name}/config", glob("config/*.yaml")),
         (f"share/{package_name}/rviz", glob("rviz/*.rviz")),
+        (f"share/{package_name}/maps", glob("maps/*")),
+        (f"lib/{package_name}", ["scripts/save_map.sh"]),
     ],
     install_requires=["setuptools"],
     zip_safe=True,
