@@ -12,6 +12,9 @@ fi
 prefix=$(realpath -m "$1")
 mkdir -p "$(dirname "$prefix")"
 
-ros2 run nav2_map_server map_saver_cli -f "$prefix" --ros-args -p use_sim_time:=true
+# The default 2 s wait for /map is too short when the simulation runs slower
+# than real time.
+ros2 run nav2_map_server map_saver_cli -f "$prefix" --ros-args \
+  -p use_sim_time:=true -p save_map_timeout:=20.0
 ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph \
   "{filename: '$prefix'}"
