@@ -18,14 +18,16 @@ diff_drive_controller:
     # Geometry from agrinav_description: track = chassis width + wheel width.
     wheel_separation: 0.7  # m
     wheel_radius: 0.15     # m
-    # Skid steer turns slower than the kinematic model predicts because the
-    # wheels scrub sideways; tuned against ground truth in the localization PR.
-    wheel_separation_multiplier: 1.0
+    # Skid-steer wheels scrub sideways, so the base turns slower than the
+    # kinematic model predicts. Measured against /ground_truth/odom: at a
+    # commanded 0.6 rad/s for 10 s the base turned 224.7 deg of 344.6 deg,
+    # hence an effective separation of 0.7 m x 1.53.
+    wheel_separation_multiplier: 1.53
 
     odom_frame_id: odom
     base_frame_id: base_footprint
-    # Published here until the EKF takes over odom -> base_footprint.
-    enable_odom_tf: true
+    # Only the EKF publishes odom -> base_footprint.
+    enable_odom_tf: false
     publish_rate: 50.0  # Hz
     # Wheel odometry is good in x and yaw rate, poor in y (no lateral sensing).
     pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]

@@ -1,0 +1,6 @@
+imu_covariance:
+  ros__parameters:
+    use_sim_time: true
+    # Squared standard deviations from agrinav_description/urdf/sensors/imu.xacro.
+    angular_velocity_variance: 0.000025  # (rad/s)^2, 0.005 squared
+    linear_acceleration_variance: 0.0004  # (m/s^2)^2, 0.02 squared

@@ -1,0 +1,34 @@
+ekf_filter_node:
+  ros__parameters:
+    use_sim_time: true
+    frequency: 50.0       # Hz, matches wheel odometry
+    sensor_timeout: 0.1   # s before prediction without a sensor update
+    two_d_mode: true
+    publish_tf: true
+    odom_frame: odom
+    base_link_frame: base_footprint
+    world_frame: odom
+    print_diagnostics: true
+
+    odom0: /diff_drive_controller/odom
+    # State order: x y z, roll pitch yaw, vx vy vz, vroll vpitch vyaw, ax ay az.
+    # Fuse velocities only; encoder pose is derived from the same measurements.
+    odom0_config: [false, false, false,
+                   false, false, false,
+                   true,  false, false,
+                   false, false, true,
+                   false, false, false]
+    odom0_queue_size: 10
+
+    imu0: /imu/data
+    imu0_config: [false, false, false,
+                  false, false, false,
+                  false, false, false,
+                  false, false, true,
+                  true,  false, false]
+    imu0_queue_size: 20
+    # Only planar acceleration is fused; do not subtract gravity using an
+    # absolute orientation that this simulated IMU does not provide.
+    imu0_remove_gravitational_acceleration: false
+    # Wheel variances come from controllers.yaml; missing IMU covariances are
+    # filled from the simulated noise by imu_covariance before fusion.

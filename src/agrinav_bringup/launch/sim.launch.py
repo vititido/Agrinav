@@ -130,6 +130,9 @@ def generate_launch_description() -> LaunchDescription:
                 parameters=[{"robot_description": robot_description, "use_sim_time": True}],
             ),
             OpaqueFunction(function=launch_world),
+            IncludeLaunchDescription(
+                PathJoinSubstitution([bringup, "launch", "localization.launch.py"])
+            ),
             Node(
                 package="ros_gz_bridge",
                 executable="parameter_bridge",

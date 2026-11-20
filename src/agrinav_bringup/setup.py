@@ -22,4 +22,10 @@ setup(
     description="Launch files and parameters that bring up the agrinav simulation and stack.",
     license="Apache-2.0",
     tests_require=["pytest"],
+    entry_points={
+        "console_scripts": [
+            "teleop = agrinav_bringup.teleop:main",
+            "imu_covariance = agrinav_bringup.imu_covariance:main",
+        ],
+    },
 )
