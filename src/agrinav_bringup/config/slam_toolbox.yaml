@@ -1,0 +1,72 @@
+# slam_toolbox online async mapping, starting from the Jazzy defaults
+# (slam_toolbox/config/mapper_params_online_async.yaml). Only the values that
+# differ for a sparse, repetitive outdoor orchard carry a comment.
+slam_toolbox:
+  ros__parameters:
+    use_sim_time: true
+
+    solver_plugin: solver_plugins::CeresSolver
+    ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
+    ceres_preconditioner: SCHUR_JACOBI
+    ceres_trust_strategy: LEVENBERG_MARQUARDT
+    ceres_dogleg_type: TRADITIONAL_DOGLEG
+    ceres_loss_function: None
+
+    odom_frame: odom
+    map_frame: map
+    base_frame: base_footprint
+    scan_topic: /scan
+    use_map_saver: true
+    mode: mapping
+
+    debug_logging: false
+    throttle_scans: 1
+    transform_publish_period: 0.02  # s
+    map_update_interval: 2.0        # s; trunks are sparse, refresh the grid often while mapping
+    resolution: 0.05                # m per cell
+    restamp_tf: false
+    min_laser_range: 0.3            # m, lidar minimum range
+    max_laser_range: 25.0           # m; trunks are 4-6 m apart, keep far rows in the map
+    minimum_time_interval: 0.5      # s
+    transform_timeout: 0.2          # s
+    tf_buffer_duration: 30.0        # s
+    stack_size_to_use: 40000000     # bytes, needed to serialize large pose graphs
+    enable_interactive_mode: false  # no RViz interaction in headless runs
+
+    use_scan_matching: true
+    use_scan_barycenter: true
+    minimum_travel_distance: 0.3    # m; more nodes than the default helps in a sparse scene
+    minimum_travel_heading: 0.3     # rad
+    check_min_dist_and_heading_precisely: false
+    scan_buffer_size: 10
+    scan_buffer_maximum_scan_distance: 20.0  # m
+    link_match_minimum_response_fine: 0.1
+    link_scan_maximum_distance: 1.5          # m
+    loop_search_maximum_distance: 4.0        # m
+    do_loop_closing: true
+    # Every aisle looks alike, so a loop closure must be backed by a longer
+    # chain of scans and a stronger match than indoors to avoid snapping one
+    # aisle onto its neighbor.
+    loop_match_minimum_chain_size: 15
+    loop_match_maximum_variance_coarse: 3.0
+    loop_match_minimum_response_coarse: 0.45
+    loop_match_minimum_response_fine: 0.55
+
+    correlation_search_space_dimension: 0.5        # m
+    correlation_search_space_resolution: 0.01      # m
+    correlation_search_space_smear_deviation: 0.1  # m
+
+    loop_search_space_dimension: 8.0         # m
+    loop_search_space_resolution: 0.05       # m
+    loop_search_space_smear_deviation: 0.03  # m
+
+    distance_variance_penalty: 0.5
+    angle_variance_penalty: 1.0
+    fine_search_angle_offset: 0.00349   # rad
+    coarse_search_angle_offset: 0.349   # rad
+    coarse_angle_resolution: 0.0349     # rad
+    minimum_angle_penalty: 0.9
+    minimum_distance_penalty: 0.5
+    use_response_expansion: true
+    min_pass_through: 2
+    occupancy_threshold: 0.1
